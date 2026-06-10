@@ -45,7 +45,23 @@ Step 4: Test Your Solution
 function processFile(fileName, fileData) {
   try {
     // TODO: Add input validation here
+    // • Missing file names 
+    if (fileName === undefined ) {
+      throw new Error ("Missing file names");
+    }
+    // • Non-string file data  
+    else if (fileData === undefined || typeof fileData !== "string") {
+      throw new Error ("Non-string file data")
+    } 
     
+    // • Empty string data 
+    else if (fileData === "") {
+      throw new Error ("Warning: Empty data type")
+    }
+    // else if (fileData === undefined) {
+    //   throw new Error("Warning: Empty data type");
+    // }
+
     // TODO: Implement simulated file processing here
     console.log(`Processing file: ${fileName}`);
     console.log(`File content: ${fileData}`);
@@ -54,9 +70,12 @@ function processFile(fileName, fileData) {
     
   } catch (err) {
     // TODO: Implement error handling
-    console.error(err);
+    console.error(err.message);
   }
   // TODO: Implement a finally block to close resources
+  finally {
+    console.log("Simulate releasing resources, regardless of whether an error occurred")
+  }
 }
 
 // ============================================
@@ -67,3 +86,15 @@ processFile(); // ❌ ReferenceError: File name is missing
 processFile("myFile.txt", 42); // ❌ TypeError: File data must be a string
 processFile("myFile.txt", ""); // ❌ Error: File data cannot be empty
 processFile("myFile.txt", "Hello, world!"); // ✅ Should process successfully
+
+// processFile("myFile.txt", "team work"); // ❌ ReferenceError: File name is missing
+// processFile("myFile.txt", "42"); // ❌ TypeError: File data must be a string
+// processFile("myFile.txt", "File data cannot be empty"); // ❌ Error: File data cannot be empty
+
+processFile(undefined,"Hello"); // ❌ ReferenceError: File name is missing
+processFile("myFile.txt", true); // ❌ TypeError: File data must be a string
+processFile("myFile.txt", ""); // ❌ Error: File data cannot be empty
+processFile("myFile.txt", "Team Work"); // ✅ Should process successfully
+
+
+
